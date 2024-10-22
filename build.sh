@@ -46,3 +46,9 @@ docker run -d \
   -p 9000:9000 \                                 # Expose NGINX on port 9000 (accessible at http://localhost:9000)
   -v $(pwd)/nginx.conf:/etc/nginx/conf.d/default.conf \  # Mount the custom NGINX configuration file
   nginx                                          # Use the official NGINX image
+
+# Modifie the Jenkins configuration file to enable the signup feature.
+docker exec jenkins-blueocean sed -i 's#<disableSignup>true</disableSignup>#<disableSignup>false</disableSignup>#' /var/jenkins_home/config.xml
+
+# Restart the Jenkins container to apply the changes made to the configuration.
+docker restart jenkins-blueocean
