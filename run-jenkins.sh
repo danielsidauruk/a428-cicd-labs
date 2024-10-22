@@ -19,6 +19,8 @@ docker run \
   docker:dind \                                  # Use Docker-in-Docker image
   --storage-driver overlay2                      # Set storage driver to overlay2 for Docker
 
+
+
 # Build the Jenkins Blue Ocean Docker image
 docker build -t myjenkins-blueocean:2.426.2-1 .  # Build the Jenkins image from your Dockerfile
 
