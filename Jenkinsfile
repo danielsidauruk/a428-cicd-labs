@@ -12,9 +12,19 @@ node {
             sh './jenkins/scripts/test.sh'
         }
 
+        stage('Manual Approval') {
+            // Add manual input for approval before deploying
+            input message: 'Proceed to the Deploy stage?', ok: 'Proceed'
+        }
+
         stage('Deploy') {
             sh './jenkins/scripts/deliver.sh' 
-            input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)' 
+
+            // Pause execution for 1 minute so the app can be tested
+            echo 'Waiting 1 minute before shutting down the application...'
+            sleep 60
+
+            // Shut down the application after the pause
             sh './jenkins/scripts/kill.sh' 
         }
     }
